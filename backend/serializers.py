@@ -11,7 +11,7 @@ from django.core.mail import send_mail
 from django.conf import settings
 
 from backend.models import Users
-
+from backend.models import Vote
 
 from rest_auth.registration.serializers import RegisterSerializer
 from rest_framework import serializers
@@ -74,3 +74,8 @@ class UserCreateSerializer(serializers.ModelSerializer):
         model = UserModel
         # Tuple of serialized model fields (see link [2])
         fields = ( "id", "email", "password", "name" )
+
+class VoteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Vote
+        fields = ("id","name","color","cats_or_dogs")
