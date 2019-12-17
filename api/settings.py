@@ -25,7 +25,7 @@ SECRET_KEY = ')rf7y+pm6j4d3)62$x+_2d25ibe(tww3e85!=^ri!j#xu1)^4i'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -37,6 +37,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_extensions',
+    #Aplicaciones de terceros
+    'rest_framework',
+    'rest_framework.authtoken',
+    'corsheaders',
+    'backend.apps.ApiConfig',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'rest_auth.registration',
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -47,6 +58,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
 
 ROOT_URLCONF = 'api.urls'
@@ -75,8 +88,12 @@ WSGI_APPLICATION = 'api.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'votingDB',
+        'USER': 'votinguser',
+        'PASSWORD': 's1mpl3p4ss',
+        'HOST': 'voting-db',   # Or an IP Address that your DB is hosted on
+        'PORT': '3306',
     }
 }
 
