@@ -74,8 +74,12 @@ class PetsList(APIView):
         totalVotes = len(Vote.objects.all());
         catsVotes = len(Vote.objects.filter(cats_or_dogs="CATS"));
         dogsVotes = len(Vote.objects.filter(cats_or_dogs="DOGS"));
-        catsPercentage = (100/totalVotes)*catsVotes;
-        dogsPercentage = (100/totalVotes)*dogsVotes;
+        if totalVotes == 0:
+            catsPercentage = 0;
+            dogsPercentage = 0;
+        else:
+            catsPercentage = (100/totalVotes)*catsVotes;
+            dogsPercentage = (100/totalVotes)*dogsVotes;
         message=[{'name': 'CATS', 'petresult': catsVotes, 'percentage': catsPercentage}, {'name': 'DOGS', 'petresult': dogsVotes, 'percentage': dogsPercentage}];
         return Response(message,status=200)
 
@@ -88,10 +92,16 @@ class ColorsList(APIView):
         greenVotes = len(Vote.objects.filter(color="GREEN"));
         yellowVotes = len(Vote.objects.filter(color="YELLOW"));
         blueVotes = len(Vote.objects.filter(color="BLUE"));
-        redPercentage = (100/totalVotes)*redVotes;
-        greenPercentage = (100/totalVotes)*greenVotes;
-        yellowPercentage = (100/totalVotes)*yellowVotes;
-        bluePercentage = (100/totalVotes)*blueVotes;
+        if totalVotes == 0:
+            redPercentage = 0;
+            greenPercentage = 0;
+            yellowPercentage = 0;
+            bluePercentage = 0;
+        else:
+            redPercentage = (100/totalVotes)*redVotes;
+            greenPercentage = (100/totalVotes)*greenVotes;
+            yellowPercentage = (100/totalVotes)*yellowVotes;
+            bluePercentage = (100/totalVotes)*blueVotes;
         message=[{'name': 'RED', 'colorresult': redVotes, 'percentage': redPercentage},
           {'name': 'BLUE', 'colorresult': blueVotes, 'percentage': bluePercentage},
           {'name': 'YELLOW', 'colorresult': yellowVotes, 'percentage': yellowPercentage},
