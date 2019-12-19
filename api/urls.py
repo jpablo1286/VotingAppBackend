@@ -21,6 +21,8 @@ from rest_framework.authtoken.views import obtain_auth_token
 urlpatterns = [
     path('api-token-auth', obtain_auth_token, name='api_token_auth'),
     path('vote/list', views.VoteList.as_view(), name='VoteList'),
+    path('vote/pets', views.PetsList.as_view(), name='PetsList'),
+    path('vote/colors', views.ColorsList.as_view(), name='ColorsList'),
     path('vote/create', views.VoteCreate.as_view(), name='VoteCreate'),
     path('vote/update/<str:id>', views.VoteUpdate.as_view(), name='VoteUpdate'),
     path('vote/delete/<str:id>', views.VoteDelete.as_view(), name='VoteDelete'),

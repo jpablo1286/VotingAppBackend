@@ -66,3 +66,34 @@ class VoteDelete(APIView):
         vote.delete()
         message = {'info': 'Vote delete successfully'}
         return Response(message,status=200)
+
+class PetsList(APIView):
+    permission_classes = (IsAuthenticated,)
+    def get(self, request):
+        userid=request.user
+        totalVotes = len(Vote.objects.all());
+        catsVotes = len(Vote.objects.filter(cats_or_dogs="CATS"));
+        dogsVotes = len(Vote.objects.filter(cats_or_dogs="DOGS"));
+        catsPercentage = (100/totalVotes)*catsVotes;
+        dogsPercentage = (100/totalVotes)*dogsVotes;
+        message=[{'name': 'CATS', 'petresult': catsVotes, 'percentage': catsPercentage}, {'name': 'DOGS', 'petresult': dogsVotes, 'percentage': dogsPercentage}];
+        return Response(message,status=200)
+
+class ColorsList(APIView):
+    permission_classes = (IsAuthenticated,)
+    def get(self, request):
+        userid=request.user
+        totalVotes = len(Vote.objects.all());
+        redVotes = len(Vote.objects.filter(color="RED"));
+        greenVotes = len(Vote.objects.filter(color="GREEN"));
+        yellowVotes = len(Vote.objects.filter(color="YELLOW"));
+        blueVotes = len(Vote.objects.filter(color="BLUE"));
+        redPercentage = (100/totalVotes)*redVotes;
+        greenPercentage = (100/totalVotes)*greenVotes;
+        yellowPercentage = (100/totalVotes)*yellowVotes;
+        bluePercentage = (100/totalVotes)*blueVotes;
+        message=[{'name': 'RED', 'colorresult': redVotes, 'percentage': redPercentage},
+          {'name': 'BLUE', 'colorresult': blueVotes, 'percentage': bluePercentage},
+          {'name': 'YELLOW', 'colorresult': yellowVotes, 'percentage': yellowPercentage},
+          {'name': 'GREEN', 'colorresult': greenVotes, 'percentage': greenPercentage}];
+        return Response(message,status=200)
