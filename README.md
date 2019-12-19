@@ -11,7 +11,7 @@ In order to keep this demo project as real as posible i built an Application in 
 
 # Backend
 
-For develop this UI i used Python with Django Rest Framework.
+For develop this Backend i used Python with Django Rest Framework.
 Basically we only have a single Model (Vote) and a few Views for CRUD methods, additional we have a couple Views for getting statisitcs for Cats, Dogs and Colors, as described by **urls.py** file.
 > urlpatterns = [
     path('api-token-auth', obtain_auth_token, name='api_token_auth'),
